@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+    <link href="{% static "courses/css/tables.css" %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+
+    <div class="container-fluid bg-1 text-center">
+        <h3> Delete Resources </h3>
+        <form action=" {% url "leaders_interfaces:lessons_resources_delete" course.id lesson.id %} " method="post"
+              onsubmit="return confirm('Are you sure you want to delete the selected resources?');">
+
+            {% csrf_token %}
+
+            <a href=" {% url "leaders_interfaces:lessons_resources" course.id lesson.id %} " role="button"
+               class="btn btn-primary btn-large">Go
+                Back</a>
+            <!-- Bolder "delete" button for better viability of irreversible operation-->
+            <button type="submit" value="Send" id="submit" class="btn btn-danger btn-large">Delete Selected</button>
+
+            <br><br>
+            {# Lessons delete checkboxes content #}
+
+            <div class="container table-content text-left">
+                <table class="table table-hover table-responsive">
+                    <h3 class="text-center">Resources</h3>
+                    <tr>
+                        <th>Resource ID</th>
+                        <th>Learning Style</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                    </tr>
+                    <tbody>
+                    {% block table_rows %}
+                        {% for resource in learning_resources %}
+                            <tr class='table-row' data-href="">
+                                <th><input title="Resource ID" type="checkbox" name="checks" value="{{ resource.id }}"/><span>
+                </span>{{ resource.id }}</th>
+                                <td>{{ resource.learning_styles.name }}</td>
+                                <td>{{ resource.title }}</td>
+                                <td>{{ resource.description }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endblock %}
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+
+    {% block resources_table_footer %}
+    {% endblock %}
+
+
+{% endblock %}

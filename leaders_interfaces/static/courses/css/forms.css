@@ -1,0 +1,29 @@
+.rounded-padding {
+    padding: 10px;
+    display: block;
+    margin: auto;
+
+}
+
+.form-content {
+    background-color: #F8F8F8;
+    color: #333333;
+    padding: 10px;
+    text-align: center;
+    font-weight: normal;
+    border-radius: 5px;
+    border: 1px solid #2f2f2f;
+    margin: auto;
+}
+
+legend {
+    display: inline-block;
+
+    max-width: 50%;
+    color: #333333;
+
+}
+
+#id_logo, #id_resources {
+    margin: auto;
+}

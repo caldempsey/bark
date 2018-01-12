@@ -1,0 +1,2 @@
+class UndefinedContextException(Exception):
+    pass

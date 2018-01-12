@@ -1,0 +1,26 @@
+{% extends "students/generic_templates/courses_lessons.html" %}
+{% block lessons_heading %}
+    <h3>{{ course.title }}</h3>
+    <p>Select a lesson to view its resources.</p>
+{% endblock %}
+{% block lessons_table_heading %}
+    <a href="{% url "students_interfaces:courses" %}" role="button" class="btn btn-primary btn-large">Go back</a>
+{% endblock %}
+{% block table_rows %}
+    {# The lesson completed tuples are sent from the Global template context. #}
+    {# The second element of the tuple [1], or .1 in the templating language tells us if the lesson is marked completed  #}
+    {% for lesson in lessons_completed_tuples %}
+        <tr class='clickable-row' data-href="/courses/{{ course.id }}/lessons/{{ lesson.0.id }}">
+        <th><span>
+                </span>{{ lesson.0.sequence_number }}</th>
+        <td>{{ lesson.0.title }}</td>
+        <td>{{ lesson.0.description }}</td>
+        {# Consider refactoring #}
+        {% if lesson.1 %}
+            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+        {% else %}
+            <td><i class="fa fa-times" aria-hidden="true"></i></td>
+        {% endif %}
+    {% endfor %}
+</tr>
+{% endblock %}

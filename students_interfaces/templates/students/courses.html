@@ -1,0 +1,61 @@
+{# Provides an iterator through all courses in for loop #}
+{% extends "students/generic_templates/courses_repeating_columns.html" %}
+{% load staticfiles %}
+{% load extended_tags %}
+{% block courses_lessons_link %}
+
+    <a style="display:block" href="{% url "students_interfaces:courses_lessons" course.id %}">
+{% endblock %}
+
+
+{% block courses_left_column %}
+    <br>
+    Your Progress
+    {# Django templating language limitations prevent efficient retreval of keys in templates despite this is a commonly requested feature, see https://code.djangoproject.com/ticket/3371 #}
+    {# A custom template tag is registered in template_tags.py to accommodate this feature. #}
+    {# The credit for this belongs to https://stackoverflow.com/questions/8000022/django-template-how-to-look-up-a-dictionary-value-with-a-variable) #}
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="70"
+             aria-valuemin="0" aria-valuemax="100"
+             style="width:{{ course_completion_percentages|get_item:course.id }}%">
+        </div>
+    </div>
+    {# Custom "equal to zero" tag to help handle how to display content depending on the percentage of lessons completed #}
+    {% if course_completion_percentages|get_item:course.id|equal_to_zero %}
+    {% else %}
+        <form action="{% url 'students_interfaces:courses_purge_progress' course.id %}" method="post"
+              onsubmit="return confirm('If you choose to reset your progress for this course, then that progress data can never be recovered. ' +
+           'Are you sure you want to do this?');">
+            {% csrf_token %}
+            <button type="submit" value="Send" id="submit" class="btn btn-primary btn-large">
+                Reset Progress
+            </button>
+        </form>
+    {% endif %}
+
+
+    <br>
+    {% if course.logo %}
+        <img src="{{ course.logo.file.url }}" class="margin" alt="{{ course.title }}"
+             width="500px"
+             height="500px">
+    {% else %}
+        <img src="{% static "png/bark.png" %}" class="img-circle"
+             style="display:inline"
+             alt="Bark Dog" width="350"
+             height="350">
+    {% endif %}
+
+
+
+{% endblock %}
+</a>
+
+{% block courses_right_column %}
+    <div class="text-left">
+        <h3>Description</h3>
+        <br>
+        <p>{{ course.description }}</p>
+        <br>
+    </div>
+{% endblock %}

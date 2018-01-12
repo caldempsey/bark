@@ -1,0 +1,40 @@
+{% extends 'base.html' %}}
+{% load staticfiles %}
+{% block head %}
+    <link href="{% static 'courses/css/course_viewer.css' %}"
+          rel="stylesheet" media="screen">
+{% endblock %}
+{% block body %}
+
+
+    {% for course in courses %}
+
+        <div class="container-fluid {% if forloop.counter|divisibleby:2 %}bg-2{% else %}bg-1{% endif %} text-center">
+            <h3>{{ course.title }}</h3>
+            Author: {{ course.author }}
+            <br><br>
+            <div class="row">
+                {% block courses_lessons_link %}
+                    <a style="display:block" href="">
+                {% endblock %}
+                <div class="container course-content">
+
+                    <div class="col-md-6">
+                        {% block courses_left_column %}
+                        {% endblock %}
+                    </div>
+                    <div class="col-md-6 text-wrap">
+                        {% block courses_right_column %}
+                        {% endblock %}
+                    </div>
+
+                </div>
+                </a>
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+{% endblock %}
+

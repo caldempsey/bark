@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+    <link href="{% static 'public/css/registration.css' %}" rel="stylesheet" media="screen">
+{% endblock %}
+{% block body %}
+
+    <div class="container-fluid bg-1 text-center">
+        <h3>Register</h3>
+        <div class="container form-content">
+            <div class="row">
+                <div class="span12">
+                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                        <div class="container">
+
+                            <fieldset>
+                                {% csrf_token %}
+                                {% for field in user_form %}
+
+                                    <div class="control-group">
+                                        {{ field.errors }}
+                                        {{ field.label_tag }}
+                                        {{ field }}
+                                    </div>
+                                    <br>
+
+
+                                {% endfor %}
+                                <p><input type="submit" value="Submit"/></p>
+
+                            </fieldset>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if user_form.error_message %}
+        <p><strong>{{ user_form.error_message }}</strong></p>
+    {% endif %}
+
+
+{% endblock %}

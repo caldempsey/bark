@@ -1,0 +1,37 @@
+{% extends "students/generic_templates/courses_lessons.html" %}
+{% block lessons_heading %}
+    <h3>Your lessons for {{ course.title }}</h3>
+    <p>Select a lesson to view its resources.</p>
+{% endblock %}
+{% block lessons_table_heading %}
+    <a href="{% url "students_interfaces:courses" %}" role="button" class="btn btn-primary btn-large">Go back</a>
+{% endblock %}
+
+{% block table_rows %}
+
+    {% for user_completed_lesson in user_completed_lessons %}
+        <tr class='clickable-row' data-href="/courses/{{ course.id }}/lessons/{{ user_completed_lesson.lesson.id }}">
+
+
+            <th><span></span>{{ user_completed_lesson.lesson.sequence_number }}</th>
+            <td>{{ user_completed_lesson.lesson.title }}</td>
+            <td>{{ user_completed_lesson.lesson.description }}</td>
+            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+
+
+        </tr>
+    {% endfor %}
+    {% if next_lesson %}
+        <tr class='clickable-row' data-href="/courses/{{ course.id }}/lessons/{{ next_lesson.id }}">
+
+            <th><span></span>{{ next_lesson.sequence_number }}</th>
+            <td>{{ next_lesson.title }}</td>
+            <td>{{ next_lesson.description }}</td>
+            <td><i class="fa fa-times" aria-hidden="true"></i></td>
+        </tr>
+    {% endif %}
+{% endblock %}
+
+
+{% block lessons_table_footer %}
+{% endblock %}

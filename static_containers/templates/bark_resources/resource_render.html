@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block body %}
+    <div class="container-fluid bg-1">
+
+        {% block iframe_header_links %}
+        {% endblock %}
+        {% block iframe_content %}
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="http://localhost:{{ host_port }}"></iframe>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <link href="{% static 'public/css/registration.css' %}" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="container-fluid bg-1 text-center">
+        <h3>Sign In</h3>
+
+        <div class="container form-content">
+            <div class="row">
+                <div class="span12">
+                    <form class="form-horizontal" role="form"
+                          action={% url 'public_interfaces:login' %} method="post" enctype="multipart/form-data">
+                        <div class="container">
+
+                            <fieldset>
+                                {% csrf_token %}
+
+                                <label for="username">Username</label>
+
+                                <input type="text" name="username" value="" id="username">
+                                <br><br>
+                                <label for="password">Password</label>
+                                <input type="password" name="password" value="" id="password">
+                                <br><br>
+                                <p><input type="submit" value="Submit"/></p>
+
+                                {% if error_message %}
+
+                                    <br><br>
+                                    <p><strong>{{ error_message }}</strong></p>
+                                {% endif %}
+                            </fieldset>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

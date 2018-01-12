@@ -1,0 +1,49 @@
+#header-wrapper {
+    display: block;
+    margin: auto;
+
+}
+
+#sidebar-wrapper {
+    display: block;
+    position: fixed;
+
+    margin: auto;
+}
+
+.sidenav {
+    overflow-y: auto;
+    float: left;
+    height: auto;
+    width: 0;
+    position: relative;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #F8F8F8;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    font-size: 22px;
+
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 16px;
+    text-decoration: none;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover, .offcanvas a:focus {
+    color: #EB6536;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+    <link href="{% static "courses/css/tables.css" %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    <div class="container-fluid bg-1 text-center">
+        <h3> {{ user.username }}'s Leader Dashboard </h3>
+        <br> <br> <br> <br> <br><br>
+        <a href="{% url "leaders_interfaces:courses_create" %}" role="button" class="btn btn-success btn-large">Create
+            a
+            new course</a>
+        <a href="{% url "leaders_interfaces:courses_delete" %}" role="button" class="btn btn-danger btn-large">Delete
+            existing courses</a>
+        <br>
+    </div>
+
+    <div class="container-fluid bg-2">
+
+        <div class="container table-content text-left">
+            <table class="table table-hover table-responsive">
+                <h3 class="text-center">Courses</h3>
+                <tr>
+                    <th>Course ID</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+                <tbody>
+                {% for course in courses %}
+
+                    <tr class="clickable-row custom-table-hover" data-href="/leaders/courses/{{ course.id }}">
+                        <th><span>
+                </span>{{ course.id }}</th>
+                        <td>{{ course.title }}</td>
+                        <td>{{ course.description }}</td>
+                    </tr>
+
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+        {% block courses_table_footer %}
+        {% endblock %}
+
+
+    </div>
+{% endblock %}
+
+
+{% block javascript %}
+    <script src="{% static 'courses/js/clickable-row.js' %}"></script>
+{% endblock %}

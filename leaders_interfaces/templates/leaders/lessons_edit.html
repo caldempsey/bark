@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block head %}
+    <link href="{% static 'courses/css/forms.css' %}" rel="stylesheet" media="screen">
+
+{% endblock %}
+{% block body %}
+    <div class="container-fluid bg-1 text-center">
+        <div class="container form-content">
+            <div class="row">
+                <div class="span12">
+                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                        <div class="container">
+
+                            <fieldset>
+                                <legend align="center"> Lesson Editor</legend>
+                                {% csrf_token %}
+                                {% for field in lessons_edit_form %}
+
+                                    <div class="control-group">
+                                        {{ field.errors }}
+                                        {{ field.label_tag }}
+                                        {{ field }}
+                                    </div>
+                                    <br>
+
+
+                                {% endfor %}
+
+
+                                <a href=" {% url "leaders_interfaces:lessons_resources" course.id lesson.id %} "
+                                   role="button"
+                                   class="btn btn-primary btn-large">Go
+                                    Back</a>
+                                <button type="submit" value="Send" id="submit" class="btn btn-success btn-large">
+                                    Submit
+                                </button>
+                            </fieldset>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

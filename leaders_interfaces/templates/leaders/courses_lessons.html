@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+    <link href="{% static "courses/css/tables.css" %}" rel="stylesheet">
+
+{% endblock %}
+{% block body %}
+    <div class="container-fluid bg-1 text-center">
+        <div class="row">
+
+            <h3>{{ course.title }}</h3>
+            <p>Select a lesson to view its resources.</p>
+
+            <div class="container col-4">
+                {% if course.logo %}
+                    <img src="{{ course.logo.file.url }}" class="img-thumbnail " style="display:inline"
+                         alt="{{ course.title }} Logo" width="500"
+                         height="500">
+                {% else %}
+                    <h3>No image to display</h3>
+                {% endif %}
+
+            </div>
+        </div>
+        {# Override Me "courses_links", describes the links above the table of courses #}
+
+        <br><br>
+
+        <a href="{% url "leaders_interfaces:courses" %}" role="button" class="btn btn-primary btn-large">Go back</a>
+        <a href="{% url "leaders_interfaces:courses_edit" course.id %}" role="button" class="btn btn-warning btn-large">Edit
+            Course</a>
+        <a href="{% url "leaders_interfaces:lesson_create" course.id %}" role="button"
+           class="btn btn-success btn-large">Create
+            a
+            new lesson</a>
+        <a href="{% url "leaders_interfaces:lessons_delete" course.id %} " role="button"
+           class="btn btn-danger btn-large">Delete
+            existing lessons</a>
+    </div>
+
+    <div class="container-fluid bg-2">
+
+        <div class="container col-8 table-content text-left">
+            <table class="table table-hover table-responsive">
+                <h3 class="text-center">Lessons</h3>
+                <tr>
+                    <th>Lesson ID</th>
+                    <th>Sequence Number</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+                <tbody>
+                {% for lesson in course.lessons_set.all %}
+                    <tr class='clickable-row' data-href="/leaders/courses/{{ course.id }}/lessons/{{ lesson.id }}">
+                        <th><span>
+                </span>{{ lesson.id }}</th>
+                        <td>{{ lesson.sequence_number }}</td>
+                        <td>{{ lesson.title }}</td>
+                        <td>{{ lesson.description }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% block lessons_table_footer %}
+    {% endblock %}
+
+
+{% endblock %}
+
+
+{% block javascript %}
+    <script src="{% static 'courses/js/clickable-row.js' %}"></script>
+{% endblock %}

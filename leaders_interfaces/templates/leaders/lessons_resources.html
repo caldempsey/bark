@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+    <link href="{% static "courses/css/tables.css" %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    <div class="container-fluid bg-1 text-center">
+
+        {# Override Me "lesson_resources_heading", general heading placement #}
+        <h3>{{ lesson.title }}</h3>
+        <br>
+        <p>Select a resource to edit its contents.</p>
+        <br>
+        <br>
+        <a href="{% url "leaders_interfaces:courses_lessons" course.id %}" role="button"
+           class="btn btn-primary btn-large">Go
+            back</a>
+        <a href="{% url "leaders_interfaces:lessons_edit" course.id lesson.id %}" role="button"
+           class="btn btn-warning btn-large">Edit
+            Lesson</a>
+        <a href="{% url "leaders_interfaces:lessons_resources_create" course.id lesson.id %}" role="button"
+           class="btn btn-success btn-large">Create a
+            new resource</a>
+        <a href="{% url "leaders_interfaces:lessons_resources_delete" course.id lesson.id %}" role="button"
+           class="btn btn-danger btn-large">Delete
+            existing resources</a>
+    </div>
+    <br>
+    <div class="container-fluid bg-2">
+
+        <div class="container table-content text-left">
+
+            <table class="table table-hover table-responsive">
+                <h3 class="text-center">Resources</h3>
+
+                <tr>
+                    <th>Resource ID</th>
+                    <th>Learning Style</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+                <tbody>
+                {% for resource in learning_resources %}
+                    <tr class='clickable-row'
+                        data-href="/leaders/courses/{{ course.id }}/lessons/{{ lesson.id }}/resources/{{ resource.id }}/edit">
+                        <th><span>
+                </span>{{ resource.id }}</th>
+                        <td>{{ resource.learning_style }}</td>
+                        <td>{{ resource.title }}</td>
+                        <td>{{ resource.description }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block javascript %}
+    <script src="{% static 'courses/js/clickable-row.js' %}"></script>
+{% endblock %}

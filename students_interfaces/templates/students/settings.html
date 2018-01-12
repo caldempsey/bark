@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+    <link href="{% static 'public/css/registration.css' %}" rel="stylesheet" media="screen">
+{% endblock %}
+{% block body %}
+
+    <div class="container-fluid bg-1 text-center">
+        <h3>Learning Styles Configuration</h3>
+        <div class="container form-content">
+            <div class="row">
+                <div class="col-xs-4">
+                    <form class="form-horizontal" role="form"
+                          onsubmit="return confirm('Changing your learning style will delete your current lesson progress for all courses. Are you sure you want to continue?');"
+                          action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ config_form }}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-xs-8 text-left">
+                    <h4>What are learning styles?</h4>
+                    <p>Learning styles are a nifty way of saying how you best learn based on cognitive functions. That's
+                        a fancy way of saying, this is
+                        the
+                        best way you learn!
+                        <br><br>
+                        The goal of Bark is to tailor lesson content to those preferences. In particular, we aim to best
+                        facilitate student learning of Java (but our platform is not limited to that).
+                        <br><br>
+                        If you would like to learn more about learning styles (or what <b>your</b> learning style is
+                        then go ahead and click the book below!
+                    <h1 class="text-center"><a
+                            href="http://www4.ncsu.edu/unity/lockers/users/f/felder/public/ILSpage.html"><i
+                            class="fa fa-book"></i></a></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

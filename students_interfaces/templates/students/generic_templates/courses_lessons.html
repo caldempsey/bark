@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+    <link href="{% static "courses/css/tables.css" %}" rel="stylesheet">
+
+{% endblock %}
+{% block body %}
+    <div class="container-fluid bg-1 text-center">
+        <div class="row">
+
+            {# Override Me "lessons_heading", general heading placement #}
+            {% block lessons_heading %}
+            {% endblock %}
+
+            <div class="container col-4">
+                <a href="">
+                    {% if course.logo %}
+                        <img src="{{ course.logo.file.url }}" class="img-thumbnail " style="display:inline"
+                             alt="Course Logo" width="500"
+                             height="500">
+                    {% else %}
+                        <h3>No image to display</h3>
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+        <br><br>
+        {% block lessons_table_heading %}
+        {% endblock %}
+    </div>
+    <br>
+    <div class="container-fluid bg-2">
+
+
+        <div class="container col-8 table-content text-left">
+            <table class="table table-hover table-responsive">
+                <h3 class="text-center">Lessons</h3>
+                <tr>
+                    <th>Lesson Number</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Completed</th>
+
+                </tr>
+                <tbody>
+                {% block table_rows %}
+                    {% for course in courses %}
+                        <tr class='clickable-row' data-href="">
+                            <th><span>
+                    </span>{{ lesson.sequence_number }}</th>
+                            <td>{{ lesson.title }}</td>
+                            <td>{{ lesson.description }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endblock %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% block lessons_table_footer %}
+    {% endblock %}
+
+
+{% endblock %}
+
+
+{% block javascript %}
+    <script src="{% static 'courses/js/clickable-row.js' %}"></script>
+{% endblock %}

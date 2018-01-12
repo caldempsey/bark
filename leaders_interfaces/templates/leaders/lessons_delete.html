@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+    <link href="{% static "courses/css/tables.css" %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    <div class="container-fluid bg-1 text-center">
+        <h3> Delete Lessons </h3>
+
+        <form action=" {% url "leaders_interfaces:lessons_delete" course.id %} " method="post"
+              onsubmit="return confirm('Are you sure you want to delete the selected lessons?');">
+
+            {% csrf_token %}
+
+            <a href=" {% url "leaders_interfaces:courses_lessons" course.id %} " role="button"
+               class="btn btn-primary btn-large">Go
+                Back</a>
+            <!-- Bolder "delete" button for better viability of irreversible operation-->
+            <button type="submit" value="Send" id="submit" class="btn btn-danger btn-large">Delete Selected</button>
+            <br><br>
+
+
+            {# Lessons delete checkboxes content #}
+            <div class="container table-content text-left">
+                <table class="table table-hover table-responsive">
+                    <h3 class="text-center">Lessons</h3>
+                    <tr>
+                        <th>Lesson ID</th>
+                        <th>Sequence Number</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                    </tr>
+                    <tbody>
+                    {% block table_rows %}
+                        {% for lesson in lessons %}
+                            <tr class='table-row' data-href="">
+                                <th><input title="Lesson ID" type="checkbox" name="checks"
+                                           value="{{ lesson.id }}"/><span>
+                </span>{{ lesson.id }}</th>
+                                <td>{{ lesson.sequence_number }}</td>
+                                <td>{{ lesson.title }}</td>
+                                <td>{{ lesson.description }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endblock %}
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+
+    {% block lessons_table_footer %}
+    {% endblock %}
+
+
+{% endblock %}

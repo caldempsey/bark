@@ -1,0 +1,2 @@
+class TemplateDoesNotExistException(Exception):
+    pass

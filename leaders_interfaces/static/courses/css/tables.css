@@ -1,0 +1,24 @@
+
+.table-content {
+    background-color: #F8F8F8;
+    color: #333333;
+    text-align: left;
+    font-weight: normal;
+    border-radius: 5px;
+    border: 1px solid #2f2f2f;
+    max-width: 1300px;
+    min-height: 50px;
+    margin: auto;
+    padding: 10px 10px 0%;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #FCE5DE;
+}
+
+legend {
+    display: inline-block;
+    max-width: 50%;
+    color: #333333;
+
+}

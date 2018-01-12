@@ -1,0 +1,2 @@
+class InvalidUserLessonProgressRequestException(Exception):
+    pass

@@ -1,0 +1,105 @@
+@font-face {
+    font-family: 'RieslingRegular';
+    src: local('Ubuntu'), url('../vendor/ubuntu-font-family-0.83/Ubuntu-R.ttf') format('truetype');
+}
+
+html {
+    height: 100%;
+    background-color: #F8F8F8;
+
+}
+
+body {
+    background-color: #F8F8F8;
+    font-family: Ubuntu, Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+    color: black;
+    font-size: 14px;
+    height: 100%;
+    min-width: 100%;
+
+}
+
+.margin {
+    margin-bottom: 45px;
+}
+
+.navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 18px;
+    letter-spacing: 5px;
+}
+
+.navbar a {
+    display: inline-block;
+}
+
+.navbar a:hover {
+    color: #EB6536 !important;
+}
+
+.navbar-brand {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 62px;
+    font-weight: bold;
+
+}
+
+.navbar-toggle {
+    z-index: 3;
+}
+
+.reduce-padding {
+    padding: 0;
+}
+
+#main {
+    background-color: #EB6536;
+    transition: margin-left .5s;
+}
+
+.bg-1 {
+    background-color: #EB6536;
+    color: #ffffff;
+}
+
+.bg-2 {
+    background-color: #474e5d;
+    color: #ffffff;
+}
+
+.bg-3 {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.bg-4 {
+    background-color: #2f2f2f;
+    color: #ffffff;
+}
+
+.container-fluid {
+    min-height: 255px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.circle-override {
+    border-radius: 50%;
+    background-position-y: center;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

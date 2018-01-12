@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+    <link href="{% static "courses/css/tables.css" %}" rel="stylesheet">
+    <link href="{% static "courses/css/course_viewer.css" %}" rel="stylesheet">
+
+{% endblock %}
+{% block body %}
+    <div class="container-fluid bg-1 text-center">
+
+        {# Override Me "lesson_resources_heading", general heading placement #}
+        {% block lesson_resources_heading %}
+            <form class="set-display-inline"
+                  action="{% url 'students_interfaces:courses_lessons_progress' course.id lesson.id %}" method="post"
+                  onsubmit="return confirm('If you choose to mark this lesson as completed you are unable to change this without resetting your progress. You will still be able to access the lesson content. Are you sure you want to do this?');">
+                {% csrf_token %}
+                <button type="submit" value="Send" id="submit" class="btn btn-warning btn-large">
+                    Mark As Completed
+                </button>
+            </form>
+        {% endblock %}
+        <br>
+        {# Override Me "resources_table_links", describes the links above the table of resources #}
+        {% block lesson_resources_table_links %}
+        {% endblock %}
+    </div>
+    <div class="container-fluid bg-2 text-center">
+        <br><br>
+        <div class="container table-content text-left">
+
+            <table class="table table-hover table-responsive">
+                <h3 class="text-center">Recommended Resources</h3>
+
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+                <tbody>
+                {% block users_resources_table_rows %}
+                    {% for resource in resources %}
+                        <tr class='clickable-row' data-href="">
+                            <th><span>
+                            <td>{{ resource.title }}</td>
+                            <td>{{ resource.description }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endblock %}
+                </tbody>
+            </table>
+        </div>
+        <br>
+    </div>
+    <div class="container-fluid bg-3 text-center">
+        <div class="container table-content text-left">
+
+            <table class="table table-hover table-responsive">
+                <h3 class="text-center">Additional Resources</h3>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+                <tbody>
+                {% block additional_resources_table_rows %}
+                    {% for resource in resources %}
+                        <tr class='clickable-row' data-href="">
+                            <th><span>
+                            <td>{{ resource.title }}</td>
+                            <td>{{ resource.description }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endblock %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% block lesson_resources_table_footer %}
+    {% endblock %}
+
+
+{% endblock %}
+
+
+{% block javascript %}
+    <script src="{% static 'courses/js/clickable-row.js' %}"></script>
+{% endblock %}

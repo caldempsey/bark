@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block body %}
+    <!-- First Container -->
+    <div class="container-fluid bg-1 text-center">
+        {% if user.is_authenticated %}
+            <h3 class="margin">Sorry, a server error has occurred ! {{ user.first_name }}!</h3>
+            <img src="{% static "png/bark.png" %}" class="img-thumbnail img-circle margin" style="display:inline"
+                 alt="Bark Dog" width="350"
+                 height="350">
+            <h3><i class="fa fa-arrow-down" aria-hidden="true"></i></h3>
+        {% else %}
+            <h3 class="margin">Sorry, the page you requested could not be found!</h3>
+            <img src="{% static "png/bark.png" %}" class="img-thumbnail img-circle margin" style="display:inline"
+                 alt="Bark Dog" width="350"
+                 height="350">
+        {% endif %}
+    </div>
+
+    <!-- Second Container -->
+    {% if user.is_authenticated %}
+        <div class="container-fluid bg-2 text-center">
+            <h3 class="margin">We are glad to have you here!</h3>
+        </div>
+
+    {% else %}
+        <div class="container-fluid bg-2 text-center">
+            <h3 class="margin">What is Bark?</h3>
+            <p>Bark is an eLearning platform here to help <em>you</em>.</p>
+        </div>
+    {% endif %}
+
+    <!-- Third Container (Grid) -->
+    <div class="container-fluid bg-3 text-center">
+        <h3 class="margin">What Bark has to offer?</h3><br>
+        <div class="row">
+            <div class="col-sm-4">
+                <p>Bark is smart! Bark gets a feeling for how you best learn and tailors its content for you!</p>
+                <img src="" class="img-responsive margin" style="width:100%" alt="Image">
+            </div>
+            <div class="col-sm-4">
+                <p>Bark barks! Bark will inform you what's going on and help you every step of the way in your learning experience.</p>
+                <img src="" class="img-responsive margin" style="width:100%" alt="Image">
+            </div>
+            <div class="col-sm-4">
+                <p>Bark is fun! Bark is designed to provide a wholesome and fun educational experience, none of that boring stuff.</p>
+                <img src="" class="img-responsive margin" style="width:100%" alt="Image">
+            </div>
+        </div>
+    </div>
+
+
+
+    {% block javascript %}
+    {% endblock %}
+{% endblock %}

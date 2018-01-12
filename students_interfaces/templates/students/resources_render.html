@@ -1,0 +1,14 @@
+{% extends "bark_resources/resource_render.html" %}
+{% load staticfiles %}
+{% block head %}
+    <link href="{% static 'css/iframe_styles.css' %}" rel="stylesheet" media="screen">
+{% endblock %}
+{% block iframe_header_links %}
+{% endblock %}
+{% block iframe_content %}
+    <div class="container iframe-content">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="http://0.0.0.0:{{ host_port }}"></iframe>
+        </div>
+    </div>
+{% endblock %}

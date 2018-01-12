@@ -1,0 +1,56 @@
+{% extends "students/generic_templates/lessons_resources.html" %}
+
+{% block lesson_resources_heading %}
+    <h3>{{ lesson.title }} resources</h3>
+    <p>Select a resource to view its content.</p>
+    <br>
+
+    <a href="{% url "students_interfaces:courses_lessons" course.id %}" role="button" class="btn btn-primary btn-large">Go
+        back</a>
+    {% if not lesson_completed %}
+        <form class="set-display-inline"
+              action="{% url 'students_interfaces:courses_lessons_progress' course.id lesson.id %}"
+              method="post"
+              onsubmit="return confirm('If you choose to mark this lesson as completed you are unable to change this without resetting your progress. You will still be able to access the lesson content. Are you sure you want to do this?');">
+            {% csrf_token %}
+            <button type="submit" value="Send" id="submit" class="btn btn-warning btn-large">
+                Mark As Completed
+            </button>
+        </form>
+    {% endif %}
+{% endblock %}
+
+{% block users_resources_table_rows %}
+    {% for resource in users_resources %}
+        <tr class='clickable-row'
+            data-href="{% url "students_interfaces:get_resource" course.id lesson.id resource.id %}">
+            <th><span>
+                </span>{{ resource.title }}</th>
+            <td>{{ resource.description }}</td>
+        </tr>
+    {% endfor %}
+
+{% endblock %}
+
+{% block additional_resources_table_rows %}
+    {% for resource in additional_resources %}
+        <tr class='clickable-row'
+            data-href="{% url "students_interfaces:get_resource" course.id lesson.id resource.id %}">
+            <th><span>
+                </span>{{ resource.title }}</th>
+            <td>{{ resource.description }}</td>
+        </tr>
+    {% endfor %}
+
+{% endblock %}
+
+
+{% for resource in user_resources %}
+    <tr class='clickable-row'
+        data-href="courses/{{ course.id }}/lessons/{{ lesson.id }}/resources/{{ resource.id }}">
+        <th><span>
+                </span>{{ resource.title }}</th>
+        <td>{{ resource.title }}</td>
+        <td>{{ resource.description }}</td>
+    </tr>
+{% endfor %}
